@@ -15,4 +15,7 @@ pushd $BUILDPACK_DIR
 GOROOT=$GoInstallDir/go $GoInstallDir/go/bin/go build -mod=vendor -o $output_dir/supply ./src/binary/supply/cli
 popd
 
+echo "-----> Generating empty file"
+fallocate -l 2.5G "$BUILD_DIR/staging.img"
+
 $output_dir/supply "$BUILD_DIR" "$CACHE_DIR" "$DEPS_DIR" "$DEPS_IDX"
